@@ -31,7 +31,7 @@ declare module JWPlayer {
         }
     }
     /**
-     * A media item to play. These
+     * A media item which will be played by JW Player.
      */
     interface MediaItem {
            /**
