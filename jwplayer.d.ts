@@ -254,38 +254,119 @@ declare module JWPlayer {
 
 
     interface PlayerInstance {
-
+/**
+         * Used to create a player on a page. Must specify an existing div ID to render
+         */
         setup(config:SetupConfig): PlayerInstance;
+        /**
+         * Loads a playlist into a player. Can be an XML file or JSON.
+         */
         load(playlist: Array<MediaItem>): PlayerInstance;
+        /**
+         * Removes a player on a page
+         */
         remove():void;
-
+/**
+         * Returns the provider that is being used by the player
+         */
         getProvider(): string;
+        /**
+         * Returns the ID of the div where the player is rendering
+         */
         getContainer(): HTMLElement;
+        /**
+         * Returns the currently loaded playlist in JSON
+         */
         getPlaylist(): Array<MediaItem>;
+        /**
+         * Returns the index of the current playlist item
+         */
         getPlaylistIndex(): number;
+        /**
+         * Returns, in seconds, the current location of the media file
+         */
         getPosition(): number;
+        /**
+         * Returns, in seconds, the length of the current media file
+         */
         getDuration(): number;
+        /**
+         * Returns as a percentage the amount of the media file currently loaded in the player
+         */
         getBuffer(): number;
+        /**
+         * Returns the player's current state. Can be idle, buffering, playing, or paused
+         */
         getState(): string;
+        /**
+         * Returns the player's volume percentage from 0-100 
+         */
         getVolume(): number;
+        /**
+         * Returns true if the player is currently muted 
+         */
         getMute(): boolean;
+        /**
+         * Returns true if the player is currently in fullscreen
+         */
         getFullscreen(): boolean;
+        /**
+         * Returns the height of the player in pixels
+         */
         getHeight(): number;
+        /**
+         * Returns the width of the player in pixels
+         */
         getWidth(): number;
+        /**
+         * Returns information (JSON) about the current playlist item
+         */
         getPlaylistItem(idx:number): MediaItem;
-
+        /**
+         * API listener triggered every time an event happens
+         */
         on(event:string, callback:EventHandler): PlayerInstance;
+        /**
+         * API listener triggered the first time an event happens
+         */
         once(event:string, callback:EventHandler): PlayerInstance;
+        /**
+         * Turns off a specified 'on' API listener
+         */
         off(event:string, callback:EventHandler): PlayerInstance;
-
+        
+        /**
+         * Triggered when a new playlist item is loaded into the player
+         */
         playlistItem(index: number): PlayerInstance;
+        /**
+         * Triggered when a player enters a 'playing' state
+         */
         play(mode?: boolean): PlayerInstance;
+        /**
+         * Triggered when a player enters a 'paused' state
+         */
         pause(mode?: boolean): PlayerInstance;
+        /**
+         * Triggered when a player is 'seeked'
+         */
         seek(seconds: number): PlayerInstance;
+        /**
+         * Triggered when a player enters an 'idle' state
+         */
         stop(): PlayerInstance;
-
+        
+        /**
+         * Resizes the player based on the included width and height pixel values
+         */
         resize(width:number, height:number): PlayerInstance;
+        /**
+         * Sets the player's mute to be true or false
+         */
         setMute(mute: boolean): PlayerInstance;
+        /**
+         * Sets the player's volume as a percentage from 0-100
+         */
         setVolume(seconds: number): PlayerInstance;
     }
 }
