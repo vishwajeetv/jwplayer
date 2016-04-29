@@ -66,6 +66,12 @@ define([
 
             _this = _.extend(this, Events);
 
+        // This creates a new chunk that's loaded separately.
+        // require() includes content in the old chunk, but errors and is not how its supposed to work
+        require.ensure(['css/jwplayer.less'], function(require) {
+            require('css/jwplayer.less');
+        }, 'styles');
+
         this.model = _model;
         this.api = _api;
 
