@@ -222,10 +222,8 @@ define([
     }
 
     function _setupView(resolve, _model, _api, _view) {
-        _view.on('fontloadcomplete', function(){
-            resolve();
-        });
         _view.setup();
+        resolve();
     }
 
     function _sendReady(resolve) {

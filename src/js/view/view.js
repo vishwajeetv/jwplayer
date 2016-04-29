@@ -65,19 +65,12 @@ define([
             // Used to differentiate tab focus events from click events
             _focusFromClick = false,
 
-            _this = _.extend(this, Events),
-            _hasFontsLoaded = false,
-            _fontsLoaded = function() {
-                _hasFontsLoaded = true;
-                _this.trigger('fontloadcomplete');
-            };
+            _this = _.extend(this, Events);
 
-        // This creates a new chunk that's loaded separately.
-        // require() includes content in the old chunk, but errors and is not how its supposed to work
-        require.ensure(['css/icon-fonts.less'], function(require) {
+        // Include the separate chunk that contains the @font-face definition
+        if (window.webpackJsonpjwplayer) {
             require('css/icon-fonts.less');
-            _fontsLoaded();
-        }, 'icon-fonts');
+        }
 
         this.model = _model;
         this.api = _api;
@@ -424,10 +417,6 @@ define([
 
                 _resize(_model.get('width'), _model.get('height'));
             });
-
-            if (_hasFontsLoaded) {
-                _this.trigger('fontloadcomplete');
-            }
         };
 
         function _onCastActive(model, val) {
