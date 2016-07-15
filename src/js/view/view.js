@@ -418,9 +418,11 @@ define([
             var aspectratio = _model.get('aspectratio');
             if (aspectratio) {
                 utils.addClass(_playerElement, 'jw-flag-aspect-mode');
-                var aspectRatioContainer = _playerElement.getElementsByClassName('jw-aspect')[0];
-                _styles(aspectRatioContainer, {
-                    paddingTop: aspectratio
+                var aspectRatioContainers = _playerElement.getElementsByClassName('jw-aspect');
+                _.each(aspectRatioContainers, function(container) {
+                    _styles(container, {
+                        paddingTop: aspectratio
+                    });
                 });
             }
 
@@ -596,7 +598,7 @@ define([
             // captions rendering
             _captionsRenderer = new CaptionsRenderer(_model);
             _captionsRenderer.setup(_playerElement.id, _model.get('captions'));
-
+            _captionsRenderer.height = _videoLayer.height;
             // captions should be place behind controls, and not hidden when controls are hidden
             _controlsLayer.parentNode.insertBefore(_captionsRenderer.element(), _title.element());
 

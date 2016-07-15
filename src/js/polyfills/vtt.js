@@ -1007,9 +1007,10 @@
       return null;
     }
 
-    // Remove all previous children.
-    while (overlay.firstChild) {
-      overlay.removeChild(overlay.firstChild);
+    // Remove all previous container.
+    var oldContainer = overlay.getElementsByClassName('jw-text-track-container')[0];
+    if(oldContainer) {
+      overlay.removeChild(oldContainer);
     }
 
     var paddedOverlay = window.document.createElement("div");

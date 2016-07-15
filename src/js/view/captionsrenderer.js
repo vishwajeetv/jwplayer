@@ -40,9 +40,8 @@ define([
 
         // display hierarchy
             _display,
-            _captionsWindow,
-            _textContainer,
             _VTTRenderer;
+            //_captionsAspectMode;
 
         _display = document.createElement('div');
         _display.className = 'jw-captions jw-reset';
@@ -142,7 +141,6 @@ define([
             } else if (found !== _current) {
                 _current = found;
                 //render with vtt.js
-                _captionsWindow.className = 'jw-captions-window jw-reset jw-captions-window-active';
                 _currentCues = [data[_current]];
                 renderCues();
             }
@@ -155,10 +153,8 @@ define([
 
         /** Constructor for the renderer. **/
         this.setup = function(playerElementId, options) {
-            _captionsWindow = document.createElement('div');
-            _textContainer = document.createElement('span');
-            _captionsWindow.className = 'jw-captions-window jw-reset';
-            _textContainer.className = 'jw-captions-text jw-reset';
+            //_captionsAspectMode = document.createElement('div');
+            //_captionsAspectMode.className = 'jw-aspect jw-reset';
 
             _options = _.extend({}, _defaults, options);
 
@@ -187,12 +183,9 @@ define([
                 addEdgeStyle('uniform', textStyle);
             }
 
-            _style(_captionsWindow, windowStyle);
-            _style(_textContainer, textStyle);
             setupCaptionStyles(playerElementId, windowStyle, textStyle);
 
-            _captionsWindow.appendChild(_textContainer);
-            _display.appendChild(_captionsWindow);
+            //_display.appendChild(_captionsAspectMode);
 
             this.populate(_model.get('captionsTrack'));
             _model.set('captions', _options);
