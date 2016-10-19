@@ -9,6 +9,7 @@ define([
     'view/displayicon',
     'view/dock',
     'view/logo',
+    'view/mute',
     'view/controlbar',
     'view/preview',
     'view/rightclick',
@@ -18,7 +19,7 @@ define([
     'templates/player.html',
     'view/breakpoint',
 ], function(utils, events, Events, Constants, states,
-            CaptionsRenderer, ClickHandler, DisplayIcon, Dock, Logo,
+            CaptionsRenderer, ClickHandler, DisplayIcon, Dock, Logo, Mute,
             Controlbar, Preview, RightClick, Title, NextUpToolTip, _, playerTemplate, setBreakpoint) {
 
     var _styles = utils.style,
@@ -48,6 +49,7 @@ define([
             _castDisplay,
             _dock,
             _logo,
+            _mute,
             _title,
             _nextuptooltip,
             _captionsRenderer,
@@ -614,11 +616,16 @@ define([
             _logo = new Logo(_model);
             _logo.on(events.JWPLAYER_LOGO_CLICK, _logoClickHandler);
 
-            var rightside = document.createElement('div');
-            rightside.className = 'jw-controls-right jw-reset';
-            _logo.setup(rightside);
-            rightside.appendChild(_dock.element());
-            _controlsLayer.appendChild(rightside);
+            var rightControls = document.createElement('div');
+            rightControls.className = 'jw-controls-right jw-reset';
+            _logo.setup(rightControls);
+            rightControls.appendChild(_dock.element());
+            _controlsLayer.appendChild(rightControls);
+
+            if (this.autoStartOnMobile()) {
+                _mute = new Mute(_model, _api.setMute);
+                rightControls.appendChild(_mute.element());
+            }
 
             // captions rendering
             _captionsRenderer = new CaptionsRenderer(_model);
@@ -646,9 +653,6 @@ define([
             // NextUp needs to be behind the controlbar to not block other tooltips
             _controlsLayer.appendChild(_nextuptooltip.element());
             _controlsLayer.appendChild(_controlbar.element());
-
-
-
 
             _playerElement.addEventListener('focus', handleFocus);
             _playerElement.addEventListener('blur', handleBlur);
@@ -1104,6 +1108,9 @@ define([
             }
             if (_logo) {
                 _logo.destroy();
+            }
+            if (_mute) {
+                _mute.destroy();
             }
             utils.clearCss(_model.get('id'));
         };

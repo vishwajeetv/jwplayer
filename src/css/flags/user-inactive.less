@@ -27,6 +27,10 @@
         }
     }
 
+    .jw-mute-dock-btn {
+        display: block;
+    }
+
     &.jw-state-buffering {
         .jw-controlbar {
             display: none;
@@ -34,5 +38,12 @@
         .jw-nextup-container {
             bottom: 0.5em;
         }
+    }
+
+    &.jw-state-complete {
+        .jw-mute-dock-btn {
+            display: none;
+        }
+
     }
 }
