@@ -105,6 +105,7 @@
                 'templates/rightclick.html': 'handlebars-loader!templates/rightclick.html',
                 'templates/slider.html': 'handlebars-loader!templates/slider.html',
                 'templates/menu.html': 'handlebars-loader!templates/menu.html',
+                'templates/mute.html': 'handlebars-loader!templates/mute.html',
                 'templates/playlist.html': 'handlebars-loader!templates/playlist.html',
                 'templates/nextup.html': 'handlebars-loader!templates/nextup.html',
                 'css/jwplayer.less': 'less!css/jwplayer',

@@ -622,7 +622,7 @@ define([
             rightControls.appendChild(_dock.element());
             _controlsLayer.appendChild(rightControls);
 
-            if (this.autoStartOnMobile()) {
+            if (_model.autoStartOnMobile()) {
                 _mute = new Mute(_model, _api.setMute);
                 rightControls.appendChild(_mute.element());
             }

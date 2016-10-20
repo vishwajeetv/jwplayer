@@ -46,8 +46,8 @@ define([
         click : function(evt) {
             var elem = this.getMuteButton(evt);
 
-            if (this.button && this.button.callback) {
-                this.button.callback(evt);
+            if (elem && elem.callback) {
+                elem.callback(evt);
             }
         },
         render: function() {
