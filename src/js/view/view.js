@@ -623,7 +623,9 @@ define([
             _controlsLayer.appendChild(rightControls);
 
             if (_model.autoStartOnMobile()) {
-                _mute = new Mute(_model, _api.setMute);
+                _mute = new Mute(_model, function() {
+                    _api.setMute();
+                });
                 rightControls.appendChild(_mute.element());
             }
 
